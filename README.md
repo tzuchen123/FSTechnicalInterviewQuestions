@@ -1,4 +1,5 @@
 # FSTechnicalInterviewQuestions
+## Q10
 
 ## Q12
 
@@ -54,5 +55,58 @@
 
 ---
 
-## Q12
+## Q13
+如何寫出輪播:
 
+1.寫一個可以看到的窗口
+---
+width: 80%;
+height: 400px;
+overflow: hidden;
+---
+
+2.把五張圖橫著排在一起
+---
+display: flex;
+width: 500%; /* 因為有 5 張圖 */
+---
+
+3.利用動畫控制膠卷往左移
+---
+animation: slide 20s infinite;
+---
+
+4.@keyframes 設定「每次移動 20%」
+---
+@keyframes slide {
+  0%   { transform: translateX(0%); }
+  20%  { transform: translateX(0%); }     
+  25%  { transform: translateX(-20%); }  
+  40%  { transform: translateX(-20%); }
+  45%  { transform: translateX(-40%); }   
+  60%  { transform: translateX(-40%); }
+  65%  { transform: translateX(-60%); }   
+  80%  { transform: translateX(-60%); }
+  85%  { transform: translateX(-80%); }  
+  100% { transform: translateX(-80%); }
+}
+---
+
+如何寫出輪播:
+conic-gradient是是 CSS 的一種漸層背景，專門用來做 圓形、圓餅圖（pie chart） 的效果。
+用法是:
+---
+background: conic-gradient(
+   顏色 百分比,
+   顏色 百分比,
+   顏色 百分比,
+...
+);
+---
+
+所以用var(--score)抓分數，有顏色部分的百分比就是 分數/ 5 *100%
+---
+background: conic-gradient (
+    #4caf50 calc(var(--score) / 5 * 100%),
+    #ddd 0);
+---

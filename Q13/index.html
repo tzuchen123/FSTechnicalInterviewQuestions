@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商品首頁輪播</title>
+    <style>
+        .slider {
+            width: 80%;
+            height: 400px;
+            margin: 50px auto;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .slides {
+            display: flex;
+            width: 500%;
+            animation: slide 20s infinite;
+        }
+
+        .slides img {
+            width: 20%;
+            object-fit: cover;
+        }
+
+        @keyframes slide {
+            0% {
+                transform: translateX(0%);
+            }
+
+            20% {
+                transform: translateX(0%);
+            }
+
+            25% {
+                transform: translateX(-20%);
+            }
+
+            40% {
+                transform: translateX(-20%);
+            }
+
+            45% {
+                transform: translateX(-40%);
+            }
+
+            60% {
+                transform: translateX(-40%);
+            }
+
+            65% {
+                transform: translateX(-60%);
+            }
+
+            80% {
+                transform: translateX(-60%);
+            }
+
+            85% {
+                transform: translateX(-80%);
+            }
+
+            100% {
+                transform: translateX(-80%);
+            }
+        }
+
+        .score-container {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            margin-top: 50px;
+            font-family: Arial, sans-serif;
+        }
+
+        .score-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            background: conic-gradient(#4caf50 calc(var(--score) / 5 * 100%),
+                    #ddd 0);
+            position: relative;
+        }
+
+        .circle::after {
+            content: attr(data-score);
+            position: absolute;
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .label {
+            font-size: 18px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slider">
+        <div class="slides">
+            <img src="https://picsum.photos/id/1011/800/400" alt="商品1">
+            <img src="https://picsum.photos/id/1015/800/400" alt="商品2">
+            <img src="https://picsum.photos/id/1019/800/400" alt="商品3">
+            <img src="https://picsum.photos/id/1025/800/400" alt="商品4">
+            <img src="https://picsum.photos/id/1035/800/400" alt="商品5">
+        </div>
+    </div>
+
+    <div class="score-container">
+        <div class="score-item">
+            <div class="circle" style="--score:4.7;" data-score="4.7"></div>
+            <span class="label">online score</span>
+        </div>
+        <div class="score-item">
+            <div class="circle" style="--score:3.1;" data-score="3.1"></div>
+            <span class="label">motion score</span>
+        </div>
+        <div class="score-item">
+            <div class="circle" style="--score:0.3;" data-score="0.3"></div>
+            <span class="label">friend score</span>
+        </div>
+    </div>
+</body>
+
+</html>
