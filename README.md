@@ -51,56 +51,64 @@
 ### 如何寫出輪播:
 
 1.寫一個可以看到的窗口
----
-width: 80%;
-height: 400px;
-overflow: hidden;
----
+``` css
+.slider {
+  width: 80%;
+  height: 400px;
+  overflow: hidden;
+}
+```
 
-2.把五張圖橫著排在一起
----
-display: flex;
-width: 500%; /* 因為有 5 張圖 */
----
+2.把五張圖橫著排在一起然後利用動畫控制膠卷往左移
+``` css
+.slides {
+  display: flex;
+  width: 500%;
+  animation: slide 20s infinite;
+}
+```
 
-3.利用動畫控制膠卷往左移
----
-animation: slide 20s infinite;
----
-
-4.@keyframes 設定「每次移動 20%」
----
+3.@keyframes 設定「每次移動 20%」
+``` css
 @keyframes slide {
   0%   { transform: translateX(0%); }
-  20%  { transform: translateX(0%); }     
-  25%  { transform: translateX(-20%); }  
+  20%  { transform: translateX(0%); }
+  25%  { transform: translateX(-20%); }
   40%  { transform: translateX(-20%); }
-  45%  { transform: translateX(-40%); }   
+  45%  { transform: translateX(-40%); }
   60%  { transform: translateX(-40%); }
-  65%  { transform: translateX(-60%); }   
+  65%  { transform: translateX(-60%); }
   80%  { transform: translateX(-60%); }
-  85%  { transform: translateX(-80%); }  
+  85%  { transform: translateX(-80%); }
   100% { transform: translateX(-80%); }
 }
----
+```
+
 
 ### 如何寫出圓圈評分:
 conic-gradient是是 CSS 的一種漸層背景，專門用來做 圓形、圓餅圖（pie chart） 的效果。
---- 
+``` css
 background: conic-gradient(
    顏色 百分比,
    顏色 百分比,
    顏色 百分比,
 ...
 );
----
+```
 
 所以用var(--score)抓分數，有顏色部分的百分比就是 分數/ 5 *100%
----
-background: conic-gradient (
+``` css
+.score-circle {
+  --score: 3.5; /* 代表分數 */
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: conic-gradient(
     #4caf50 calc(var(--score) / 5 * 100%),
-    #ddd 0);
----
+    #ddd 0
+  );
+}
+```
 
 ## Q14
 如果要自己打造一個框架，參考過去使用過的框架，和過去工作經驗中遇到的痛點，根據不同類別，我會希望我的框架有以下這些元件。
@@ -135,8 +143,9 @@ background: conic-gradient (
 假設會有前端去呈現畫面，前端會去跟後端要資料，後端回傳資料（ex.json格式），類似於前後端分離，後端提供api的模式。
 
 1.有db
+
 先用node.js/php/python把資料存到table
----
+```sql
 CREATE TABLE employees (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(50),
@@ -144,9 +153,10 @@ CREATE TABLE employees (
   age INT,
   start_date DATE
 );
----
+```
 後端用sql語法或ORM實作，ORM寫法類似於Q12，sql寫法如下。
----
+
+```sql
 -- 搜尋
 SELECT * FROM employees 
 WHERE name LIKE '%alex%';
@@ -159,7 +169,8 @@ ORDER BY age ASC;
 SELECT * FROM employees 
 ORDER BY age ASC
 LIMIT 10 OFFSET 10;
----
+
+```
 
 2.沒有db
 當前端呼叫 API 的時候，後端程式會去讀取一個html檔案，將表格內的每一列資料解析並轉換成陣列，每一列就是陣列的一個元素。
