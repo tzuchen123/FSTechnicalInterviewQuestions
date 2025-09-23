@@ -191,6 +191,11 @@ inner join只取出兩個表格中「都有符合條件」的資料，right join
 
 ## Q18
 針對這個查詢語句，我建議建立複合索引來優化效能：
+```sql
+CREATE INDEX idx_report_landing_page_filter
+ON report_landing_page (publisher_id, domain_id, date, landing_page);
+```
+在這個查詢裡，主要的過濾條件是 publisher_id、domain_id 和日期區間，最後還需要依照 landing_page 做分組。要加速這種查詢，最有效的方法是建立複合索引，把等值條件的欄位放前面、範圍條件放中間、分組或排序欄位放最後，因此我會在 report_landing_page 上建立 (publisher_id, domain_id, date, landing_page) 這個索引。這樣資料庫可以直接透過索引篩選出符合 publisher 與 domain 的資料，再依照日期做範圍查詢，最後在 landing_page 上完成 group by，避免額外的排序與臨時表開銷。相較於單獨對每個欄位建立索引，這樣的複合索引能夠更完整地覆蓋這個查詢邏輯，查詢效能提升效果也會更明顯。
 
 
 ## Q19
